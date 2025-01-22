@@ -8,7 +8,13 @@
 </head>
 <body>
     <div class="container">
-        <h1>@yield("title")</h1>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-8">
+                <h1>@yield("title")</h1>
+            </div>
+            <div class="col"></div>
+        </div>
         <div class="row">
             <div class="col"></div>
             <div class="col-8">
