@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\VimeoItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Vimeo\Laravel\Facades\Vimeo;
+use Illuminate\Support\Str;
+// use Vimeo\Vimeo;
 
 class ViemoController extends Controller
 {
@@ -19,13 +23,14 @@ class ViemoController extends Controller
         ]);
         $id = Auth::user()->id;
         $file = $request->file("video");
-        $filename = $file->getClientOriginalName();
-        $path = $file->storeAs(storage_path('tmp'), $file->getClientOriginalName());
+        $filename = Str::uuid();
+        $path = $file->storeAs('tmp', $filename . '.' . $file->extension());
         $videoItem = VimeoItem::firstOrNew([
             "user_id" => $id,
         ]);
         $videoItem->name = $filename;
         $videoItem->path = $path;
+        Vimeo::upload(Storage::path($path));
         $videoItem->save();
 
         return redirect()->to(route("vimeo.index"));

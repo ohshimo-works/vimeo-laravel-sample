@@ -8,16 +8,16 @@
 </head>
 <body>
     <div class="container">
-        <div class="row">
+        <div class="row mt-5">
             <div class="col"></div>
-            <div class="col-8">
+            <div class="col-6">
                 <h1>@yield("title")</h1>
             </div>
             <div class="col"></div>
         </div>
-        <div class="row">
+        <div class="row mt-1">
             <div class="col"></div>
-            <div class="col-8">
+            <div class="col-6">
                 @yield("content")
             </div>
             <div class="col"></div>
