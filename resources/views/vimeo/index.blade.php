@@ -16,14 +16,21 @@
             <th>ID</th>
             <th>ユーザー名</th>
             <th>動画名</th>
-            <th>動画リンク</th>
+            <th>詳細リンク</th>
+            <th>操作</th>
         </tr>
         @foreach ($items as $item)
         <tr>
             <td>{{ $item->id }}</td>
             <td>{{ $item->user->name }}</td>
             <td>{{ $item->name }}</td>
-            <td>{{ $item->path }}</td>
+            <td><a href="{{route("vimeo.detail", $item->id)}}">DetailPage</a></td>
+            <td>
+                <div class="d-flex justify-content-between" style="width:max-content;">
+                    <button class="btn btn-outline-success modify">変更</button>
+                    <button class="btn btn-outline-danger delete">削除</button>
+                </div>
+            </td>
         </tr>
         @endforeach
     </table>
