@@ -14,7 +14,8 @@ class ViemoController extends Controller
 {
     public function index(Request $request){
         $items = VimeoItem::all();
-        return view("vimeo.index", compact("items"));
+        $user = Auth::user();
+        return view("vimeo.index", compact("items", "user"));
     }
 
     public function upload(Request $request){
@@ -29,8 +30,7 @@ class ViemoController extends Controller
             "user_id" => $id,
         ]);
         $videoItem->name = $filename;
-        $videoItem->path = $path;
-        Vimeo::upload(Storage::path($path));
+        $videoItem->path = Vimeo::upload(Storage::path($path));
         $videoItem->save();
 
         return redirect()->to(route("vimeo.index"));
